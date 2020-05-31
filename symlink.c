@@ -1,3 +1,5 @@
+#include "symlink.h"
+
 /************************************************
  * Function: symlink
  * Programmer: Chandler Teigen

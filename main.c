@@ -23,11 +23,11 @@ int fd, dev;
 int nblocks, ninodes, bmap, imap, inode_start; // disk parameters
 int dup_fd, dup_gd;
 
-#include "util.c"
+#include "util.h"
+#include "symlink.h"
 #include "cd_ls_pwd.c"
 #include "mkdir_creat.c"
 #include "link_unlink.c"
-#include "symlink.c"
 #include "rmdir.c"
 #include "open_close_lseek.c"
 #include "read_cat.c"
