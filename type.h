@@ -1,6 +1,22 @@
-/*************** type.h file ************************/
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * defines the necessary data types for the 
+ * filesystem.
+ * *******************************************/
 
-//the following type definitions provided by KC Wang, CS360 Spring 2020
+#ifndef TYPE_H
+#define TYPE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <ext2fs/ext2_fs.h>
+#include <string.h>
+#include <libgen.h>
+#include <sys/stat.h>
+#include <time.h>
 
 typedef unsigned char  u8;
 typedef unsigned short u16;
@@ -48,3 +64,5 @@ typedef struct proc{
   MINODE      *cwd;
   OFT         *fd[NFD];
 }PROC;
+
+#endif

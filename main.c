@@ -1,16 +1,11 @@
-/****************************************************************************
-*                   KCW  Implement ext2 file system                         *
-*****************************************************************************/
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * A Linux compatible ext2 filesystem that 
+ * implements many of the common commands
+ * *******************************************/
 
-// the followng code is adapted from KC Wang's File System assignment
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <ext2fs/ext2_fs.h>
-#include <string.h>
-#include <libgen.h>
-#include <sys/stat.h>
-#include <time.h>
 
 #include "type.h"
 
