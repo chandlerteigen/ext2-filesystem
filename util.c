@@ -1,4 +1,12 @@
-/*********** util.c file ****************/
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * Contains the misc. utility functions used
+ * throughout the filesystem code.
+ * *******************************************/
+
+#include "util.h"
 
 // Unless otherwise stated, all following functions are provided by KC Wang in
 // the ext2 FS mount root starter code. CS 360 Spring 2020
@@ -80,15 +88,6 @@ void iput(MINODE *mip) {
   if (!mip->dirty) // INODE has not changed; no need to write back
     return;
 
-  /* write INODE back to disk */
-  /***** NOTE *******************************************
-   For mountroot, we never MODIFY any loaded INODE
-                  so no need to write it back
-   FOR LATER WROK: MUST write INODE back to disk if refCount==0 && DIRTY
-
-   Write YOUR code here to write INODE back to disk
-  ********************************************************/
-
   // adapted from (Wang, 324)
   block = (mip->ino - 1) / 8 + inode_start;
   offset = (mip->ino - 1) % 8;
@@ -104,7 +103,6 @@ int search(MINODE *mip, char *name) {
   DIR *dp;
   INODE *ip;
 
-  // printf("search for %s in MINODE = [%d, %d]\n", name, mip->dev, mip->ino);
   ip = &(mip->INODE);
 
   /*** search for name in mip's data blocks: ASSUME i_block[0] ONLY ***/
@@ -117,10 +115,8 @@ int search(MINODE *mip, char *name) {
   while (cp < sbuf + BLKSIZE) {
     strncpy(temp, dp->name, dp->name_len);
     temp[dp->name_len] = 0;
-    // printf("%4d  %4d  %4d    %s\n", dp->inode, dp->rec_len, dp->name_len,
-    // temp);
+
     if (strcmp(temp, name) == 0) {
-      // printf("found %s : ino = %d\n", temp, dp->inode);
       return dp->inode;
     }
     cp += dp->rec_len;
@@ -135,7 +131,6 @@ int getino(char *pathname) {
   INODE *ip;
   MINODE *mip;
 
-  // printf("getino: pathname=%s\n", pathname);
   if (strcmp(pathname, "/") == 0)
     return 2;
 
@@ -150,9 +145,6 @@ int getino(char *pathname) {
   tokenize(pathname);
 
   for (i = 0; i < n; i++) {
-    // printf("===========================================\n");
-    // printf("getino: i=%d name[%d]=%s\n", i, i, name[i]);
-
     ino = search(mip, name[i]);
 
     if (ino == 0) {
@@ -166,12 +158,6 @@ int getino(char *pathname) {
 
   iput(mip); // release mip
   return ino;
-}
-
-int findmyname(MINODE *parent, u32 myino, char *myname) {
-  // WRITE YOUR code here:
-  // search parent's data block for myino;
-  // copy its name STRING to myname[ ];
 }
 
 int findino(MINODE *mip, u32 *myino) // myino = ino of . return ino of ..
@@ -195,12 +181,6 @@ int findino(MINODE *mip, u32 *myino) // myino = ino of . return ino of ..
   return ino;
 }
 
-/************************************************
- * Function: int get_myino(MINODE *mip, int *parent_ino)
- * Programmer: Chandler Teigen
- * Description:
- * Return value is mip's ino, and parent ino in int *parent_ino
- * ***********************************************/
 int get_myino(MINODE *mip, int *parent_ino) {
 
   char buf[BLKSIZE];
@@ -236,14 +216,6 @@ int get_myname(MINODE *parent_minode, int my_ino, char *my_name) {
   my_name[dp->name_len] = 0;
 }
 
-/**********************CODE ADDED FROM KC WANG
- * ASSIGNMENT*************************************************************/
-/************************************************
- * Function: int tst_bit(char *buf, int bit)
- * Programmer: Chandler Teigen
- * Description:
- * Function written using equations from (Wang, 306)
- * ***********************************************/
 int tst_bit(char *buf, int bit) {
   int i, j, status;
 
@@ -258,12 +230,6 @@ int tst_bit(char *buf, int bit) {
   return status;
 }
 
-/************************************************
- * Function: int set_bit(char *buf, int bit)
- * Programmer: Chandler Teigen
- * Description:
- * Function written using equations from (Wang, 306)
- * ***********************************************/
 int set_bit(char *buf, int bit) {
   int i, j;
 
@@ -272,12 +238,6 @@ int set_bit(char *buf, int bit) {
   buf[i] |= (1 << j);
 }
 
-/************************************************
- * Function: int clr_bit(char *buf, int bit)
- * Programmer: Chandler Teigen
- * Description:
- * Function from (Wang, 338)
- * ***********************************************/
 int clr_bit(char *buf, int bit) {
   // find the byte that the bit is located in
   // then found its location in the byte
@@ -305,12 +265,6 @@ int ialloc(int dev) // allocate an inode number from inode_bitmap
   return 0;
 }
 
-/************************************************
- * Function: int idalloc(int dev, int ino)
- * Programmer: Chandler Teigen
- * Description:
- * deallocation an inode from the inode bitmap
- * ***********************************************/
 int idalloc(int dev, int ino) {
   char buf[BLKSIZE];
 
@@ -326,15 +280,7 @@ int idalloc(int dev, int ino) {
 
   return 0;
 }
-/************************************************************************************************/
 
-/************************************************
- * Function: int balloc(int dev)
- * Programmer: Chandler Teigen
- * Description:
- * Allocates a block on the disk device.
- * adapted from ialloc code (Wang, 333)
- * ***********************************************/
 int balloc(int dev) {
   int i;
   char buf[BLKSIZE];
@@ -353,12 +299,6 @@ int balloc(int dev) {
   return 0; // indicates failure to allocate new blk
 }
 
-/************************************************
- * Function: int bdalloc(int dev, int bno)
- * Programmer: Chandler Teigen
- * Description:
- * deallocates a block on the disk device.
- * ***********************************************/
 int bdalloc(int dev, int bno) {
   char buf[BLKSIZE];
 
@@ -373,14 +313,6 @@ int bdalloc(int dev, int bno) {
   printf("Deallocated block %d\n", bno);
 }
 
-/************************************************
- * Function: int inc_free_inodes(int dev)
- * Programmer: Chandler Teigen
- * Description:
- * increments the free inodes count in the superblock
- * and the group descriptor by 1.
- * implementation credit to KC Wang,(Wang, 338)
- * ***********************************************/
 int inc_free_inodes(int dev) {
   SUPER *sp;
   GD *gd;
@@ -400,14 +332,6 @@ int inc_free_inodes(int dev) {
   put_block(dev, 2, buf);
 }
 
-/************************************************
- * Function: int dec_free_inodes(int dev)
- * Programmer: Chandler Teigen
- * Description:
- * decrements the free inodes count in the superblock
- * and the group descriptor by 1.
- * implementation credit to KC Wang,(Wang, 338)
- * ***********************************************/
 int dec_free_inodes(int dev) {
   SUPER *sp;
   GD *gd;
