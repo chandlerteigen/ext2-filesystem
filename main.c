@@ -6,7 +6,6 @@
  * implements many of the common commands
  * *******************************************/
 
-
 #include "type.h"
 #include "util.h"
 #include "symlink.h"
@@ -14,9 +13,9 @@
 #include "mkdir_creat.h"
 #include "open_close_lseek.h"
 #include "read_cat.h"
+#include "rmdir.h"
 
 #include "cd_ls_pwd.c"
-#include "rmdir.c"
 #include "write_cp.c"
 
 // global variables

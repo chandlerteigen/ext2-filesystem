@@ -1,3 +1,12 @@
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * Contains the functions for the rmdir command.
+ * *******************************************/
+
+#include "rmdir.h"
+
 int rm_child(MINODE *pmip, char *name) {
   char buf[BLKSIZE], *cp, temp[256];
   DIR *dp, *dp_previous;
