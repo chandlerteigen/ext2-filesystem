@@ -15,8 +15,7 @@
 #include "read_cat.h"
 #include "rmdir.h"
 #include "write_cp.h"
-
-#include "cd_ls_pwd.c"
+#include "cd_ls_pwd.h"
 
 // global variables
 MINODE minode[NMINODE];

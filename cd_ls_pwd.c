@@ -1,4 +1,12 @@
-/************* cd_ls_pwd.c file **************/
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * Contains the functions for the cd, ls and pwd
+ * commands.
+ * *******************************************/
+
+#include "cd_ls_pwd.h"
 
 /************************************************
  * Function: int mychdir(char *pathname)
