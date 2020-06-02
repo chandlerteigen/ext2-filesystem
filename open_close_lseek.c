@@ -1,15 +1,12 @@
-
-
-
-
-/************************************************
- * Function: ct_truncate
+/*********************************************
  * Programmer: Chandler Teigen
- * Description: iterates over the inode's data blocks
- * and sets the bytes in each block to zero. Handles
- * indirect and double indirect blocks if they have
- * been allocated.
- * ***********************************************/
+ * Date: 5/31/2020
+ * Description:
+ * Contains the functions for the open, close,
+ * and lseek commands, and related functions.
+ * *******************************************/
+
+#include "open_close_lseek.h"
 
 int ct_truncate(MINODE *mip) {
   char buf[BLKSIZE], buf2[BLKSIZE], buf3[BLKSIZE];
@@ -71,12 +68,6 @@ int ct_truncate(MINODE *mip) {
   mip->dirty = 1;
 }
 
- /************************************************
- * Function: open_file
- * Programmer: Chandler Teigen
- * Description: prompts the user for a pathname
- * and a mode Then calls ct_open.
- * ***********************************************/
 int open_file()
 {
   char pathname[100];
@@ -88,15 +79,6 @@ int open_file()
   printf("\n");
   ct_open(pathname, mode);
 }
-
-
-/************************************************
- * Function: ct_open
- * Programmer: Chandler Teigen
- * Description: opens the filename indicated by the
- * pathname with the mode indicated by flags.
- * 0 1 2 3 for Read, Write, Read/Write and Append
- * ***********************************************/
 
 int ct_open(char *pathname, int flags) {
   int ino, permission_ok = 0, fd, i, open_okay;
@@ -216,12 +198,6 @@ int ct_open(char *pathname, int flags) {
   }
 }
 
-/************************************************
- * Function: close_file
- * Programmer: Chandler Teigen
- * Description: prompts the user for a file descriptor
- * then calls ct_close.
- * ***********************************************/
 int close_file()
 {
   int fd;
@@ -233,14 +209,6 @@ int close_file()
   ct_close(fd);
 
 }
-
-/************************************************
- * Function: ct_close
- * Programmer: Chandler Teigen
- * Description: closes the file attached to the
- * file descriptor. and releases the minode and 
- * OFT if necessary.
- * ***********************************************/
 
 int ct_close(int fd) {
   OFT *oftp;
@@ -274,13 +242,6 @@ int ct_close(int fd) {
   }
 }
 
-/************************************************
- * Function: lseek_file
- * Programmer: Chandler Teigen
- * Description: prompts the user for a file descriptor
- * and a byte position, then calls ct_lseek with
- * those arguments.
- * ***********************************************/
 int lseek_file()
 {
   int fd, position;
@@ -291,13 +252,6 @@ int lseek_file()
   printf("\n");
   ct_lseek(fd, position);
 }
-
-/************************************************
- * Function: ct_lseek
- * Programmer: Chandler Teigen
- * Description: changes the files offset to the 
- * desired byte position.
- * ***********************************************/
 
 int ct_lseek(int fd, int position) {
   OFT *oftp;
@@ -322,14 +276,6 @@ int ct_lseek(int fd, int position) {
   }
 }
 
-
-/************************************************
- * Function: pfd
- * Programmer: Chandler Teigen
- * Description: prints the current open file descriptors
- * for the running process.
- * ***********************************************/
-
 int pfd() {
   char modes[4][12] = {"READ", "WRITE", "RE/WR", "APND"};
 
@@ -343,15 +289,6 @@ int pfd() {
     }
   }
 }
-
-
-/************************************************
- * Function: dup
- * Programmer: Chandler Teigen
- * Description: duplicates the file descriptor into
- * the smallest free file descriptor of the running
- * process.
- * ***********************************************/
 
 int dup(int fd) {
   int i;
@@ -372,14 +309,6 @@ int dup(int fd) {
     printf("dup error: fd is not open\n");
   }
 }
-
-
-/************************************************
- * Function: dup2
- * Programmer: Chandler Teigen
- * Description: duplicates the first file descriptor
- * into the second. If gd is open, it is closed first.
- * ***********************************************/
 
 int dup2(int fd, int gd) {
   // if gd is already open, close it

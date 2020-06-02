@@ -8,6 +8,16 @@
 
 
 #include "type.h"
+#include "util.h"
+#include "symlink.h"
+#include "link_unlink.h"
+#include "mkdir_creat.h"
+#include "open_close_lseek.h"
+
+#include "cd_ls_pwd.c"
+#include "rmdir.c"
+#include "read_cat.c"
+#include "write_cp.c"
 
 // global variables
 MINODE minode[NMINODE];
@@ -23,16 +33,6 @@ int fd, dev;
 int nblocks, ninodes, bmap, imap, inode_start; // disk parameters
 int dup_fd, dup_gd;
 
-#include "util.h"
-#include "symlink.h"
-#include "link_unlink.h"
-#include "mkdir_creat.h"
-
-#include "cd_ls_pwd.c"
-#include "rmdir.c"
-#include "open_close_lseek.c"
-#include "read_cat.c"
-#include "write_cp.c"
 
 int init() {
   int i, j;
