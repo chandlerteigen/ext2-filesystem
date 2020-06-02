@@ -1,10 +1,17 @@
-/************************************************
- * Function: int enter_name(MINODE *pip, int ino, char *name)
+/*********************************************
  * Programmer: Chandler Teigen
+ * Date: 5/31/2020
  * Description:
- * adds the directory name to the parent inode.
- * Follows algorithm from (Wang, 334)
- * ***********************************************/
+ * Contains the functions that do that commands
+ * mkdir and creat.
+ * *******************************************/
+
+#include "mkdir_creat.h"
+
+// global variables defined in main.c
+extern int dev;
+extern PROC *running;
+
 int enter_name(MINODE *pip, int ino, char *name) {
   int i, remaining, needed_length, dp_ideal, current_block;
   char buf[BLKSIZE];
@@ -61,12 +68,6 @@ int enter_name(MINODE *pip, int ino, char *name) {
   return 0;
 }
 
-/************************************************
- * Function: int divide_pathname(char *pathname, char *dir, char *base)
- * Programmer: Chandler Teigen
- * Description:
- * splits the pathname string into a dir, and a base file name.
- * ***********************************************/
 int divide_pathname(char *pathname, char *dir, char *base) {
   int length = strlen(pathname);
   int slash = 0;
@@ -88,13 +89,6 @@ int divide_pathname(char *pathname, char *dir, char *base) {
   }
 }
 
-/************************************************
- * Function: int ct_mkdir(char *pathname)
- * Programmer: Chandler Teigen
- * Description:
- * implements mkdir by using the algorithm described by
- * (Wang, 332)
- * ***********************************************/
 int ct_mkdir(char *pathname) {
   MINODE *start, *pmip;
   char dir[100];
@@ -120,12 +114,6 @@ int ct_mkdir(char *pathname) {
   iput(pmip);
 }
 
-/************************************************
- * Function: ct_mkdir_helper(MINODE *pmip, char *base)
- * Programmer: Chandler Teigen
- * Description:
- * helper function continuing the algorith from (Wang, 332)
- * ***********************************************/
 int ct_mkdir_helper(MINODE *pmip, char *base) {
   int ino, blk;
   MINODE *mip;
@@ -170,13 +158,6 @@ int ct_mkdir_helper(MINODE *pmip, char *base) {
   enter_name(pmip, ino, base);
 }
 
-/************************************************
- * Function: int ct_creat_file(char *pathname)
- * Programmer: Chandler Teigen
- * Description:
- * essntially a copy and paste from ct_mkdir, but
- * with different file type bits.
- * ***********************************************/
 int ct_creat_file(char *pathname) {
   MINODE *start, *pmip;
   char dir[100];
@@ -205,12 +186,6 @@ int ct_creat_file(char *pathname) {
   iput(pmip);
 }
 
-/************************************************
- * Function: int ct_creat_file_helper(MINODE *pmip, char *base)
- * Programmer: Chandler Teigen
- * Description:
- * another copy paste of the mkdir code above
- * ***********************************************/
 int ct_creat_file_helper(MINODE *pmip, char *base) {
   int ino, blk;
   MINODE *mip;
@@ -234,23 +209,6 @@ int ct_creat_file_helper(MINODE *pmip, char *base) {
   }
   mip->dirty = 1;
   iput(mip);
-  /*
-    // create data block for new dir containing . and ..
-    char buf[BLKSIZE];
-    bzero(buf, BLKSIZE);
-    DIR *dp = (DIR*)buf;
-    //make .0x7fffffffcf2c
-    dp->inode = ino;
-    dp->rec_len = 12;
-    dp->name_len = 1;
-    dp->name[0] = '.';
-    //make ..
-    dp = (char *)dp + 12;
-    dp->inode = pmip->ino;
-    dp->rec_len = BLKSIZE - 12;
-    dp->name_len = 2;
-    dp->name[0] = dp->name[1] = '.';
-    put_block(dev, blk, buf);
-*/
+
   enter_name(pmip, ino, base);
 }
