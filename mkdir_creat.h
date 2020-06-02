@@ -8,6 +8,10 @@
 
 #include "type.h"
 
+// global variables defined in main.c
+extern int dev;
+extern PROC *running;
+
 /************************************************
  * Function: int enter_name(MINODE *pip, int ino, char *name)
  * Programmer: Chandler Teigen

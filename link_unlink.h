@@ -8,6 +8,9 @@
 
 #include "type.h"
 
+// global variable declared in main.c
+extern int dev;
+
 /************************************************
  * Function: link
  * Programmer: Chandler Teigen

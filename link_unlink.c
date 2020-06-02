@@ -7,16 +7,6 @@
 
 #include "link_unlink.h"
 
-// global variable declared in main.c
-extern int dev;
-
-/*********************************************
- * Function: link
- * Programmer: Chandler Teigen
- * Description: links the file with the string name
- * old_file to a new file with the string name
- * new_file.
- * *******************************************/
 int link(char *old_file, char *new_file) {
   int oino, nino, pino;
   MINODE *omip, *nmip, *pmip;
@@ -45,12 +35,6 @@ int link(char *old_file, char *new_file) {
   }
 }
 
-/************************************************
- * Function: ulink
- * Programmer: Chandler Teigen
- * Description: unlinks the file indicated by
- * the filename
- * ***********************************************/
 int ulink(char *filename) {
   int ino, pino;
   MINODE *mip, *pmip;

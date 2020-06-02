@@ -8,10 +8,6 @@
 
 #include "mkdir_creat.h"
 
-// global variables defined in main.c
-extern int dev;
-extern PROC *running;
-
 int enter_name(MINODE *pip, int ino, char *name) {
   int i, remaining, needed_length, dp_ideal, current_block;
   char buf[BLKSIZE];
