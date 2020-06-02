@@ -8,6 +8,8 @@
 
 #include "type.h"
 
+extern int dev;
+
 int rm_child(MINODE *pmip, char *name);
 
 /************************************************
