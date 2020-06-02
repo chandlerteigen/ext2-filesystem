@@ -13,10 +13,10 @@
 #include "link_unlink.h"
 #include "mkdir_creat.h"
 #include "open_close_lseek.h"
+#include "read_cat.h"
 
 #include "cd_ls_pwd.c"
 #include "rmdir.c"
-#include "read_cat.c"
 #include "write_cp.c"
 
 // global variables

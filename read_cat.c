@@ -1,10 +1,12 @@
-
-/************************************************
- * Function: find_min
+/*********************************************
  * Programmer: Chandler Teigen
- * Description: returns the minimum of the three
- * integer arguments
- * ***********************************************/
+ * Date: 5/31/2020
+ * Description:
+ * Contains the functions for the read and cat commands,
+ * plus related functions.
+ * *******************************************/
+
+#include "read_cat.h"
 
 int find_min(int num1, int num2, int num3) {
   int min = num1;
@@ -17,12 +19,6 @@ int find_min(int num1, int num2, int num3) {
   return min;
 }
 
-/************************************************
- * Function: cat
- * Programmer: Chandler Teigen
- * Description: opens the file for read, prints the
- * contents to the console, then closes the file.
- * ***********************************************/
 int cat(char *pathname) {
   char buf[BLKSIZE + 1], dummy = 0;
   int n;
@@ -37,12 +33,6 @@ int cat(char *pathname) {
   }
 }
 
-/************************************************
- * Function: ct_read
- * Programmer: Chandler Teigen
- * Description: reads nbytes bytes from the file
- * descriptor into buf.
- * ***********************************************/
 int ct_read(int fd, char *buf, int nbytes) {
   OFT *oftp = running->fd[fd];
   MINODE *mip = oftp->mptr;
@@ -100,12 +90,7 @@ int ct_read(int fd, char *buf, int nbytes) {
   // printf("ct_read: read %d char from fd %d\n", count, fd);
   return count;
 }
-/************************************************
- * Function: read_file
- * Programmer: Chandler Teigen
- * Description: prompts the user for a file descriptor
- * and a number of bytes,
- * ***********************************************/
+
 int read_file() {
   int fd, nbytes, bytes_read;
   char buf[BLKSIZE], nl;
