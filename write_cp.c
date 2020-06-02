@@ -1,10 +1,13 @@
-
-/************************************************
- * Function: ct_cp
+/*********************************************
  * Programmer: Chandler Teigen
- * Description: reads the contents of the source file
- * and writes them to the destination file.
- * ***********************************************/
+ * Date: 5/31/2020
+ * Description:
+ * Contains the functions for the write and cp
+ * commands.
+ * *******************************************/
+
+#include "write_cp.h"
+
 int ct_cp(char *srcpath, char *destpath) {
   int fd, gd, n;
   char buf[BLKSIZE];
@@ -19,13 +22,6 @@ int ct_cp(char *srcpath, char *destpath) {
   ct_close(gd);
 }
 
-/************************************************
- * Function: ct_write
- * Programmer: Chandler Teigen
- * Description: writes nbytes bytes from the memory
- * pointed to by buf into the file indicated by the
- * file descriptor.
- * ***********************************************/
 int ct_write(int fd, char *buf, int nbytes) {
 
   int lbk, blk, start_byte, count = 0;
@@ -120,13 +116,6 @@ int ct_write(int fd, char *buf, int nbytes) {
   return nbytes;
 }
 
-/************************************************
- * Function: write_file
- * Programmer: Chandler Teigen
- * Description: Prompts the user for a file descriptor
- * and a string to write to the file, then it calls
- * ct_write.
- * ***********************************************/
 int write_file() {
   char buf[BLKSIZE], nl;
   int fd, nbytes;

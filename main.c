@@ -14,9 +14,9 @@
 #include "open_close_lseek.h"
 #include "read_cat.h"
 #include "rmdir.h"
+#include "write_cp.h"
 
 #include "cd_ls_pwd.c"
-#include "write_cp.c"
 
 // global variables
 MINODE minode[NMINODE];
