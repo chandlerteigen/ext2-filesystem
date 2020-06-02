@@ -1,10 +1,22 @@
+/*********************************************
+ * Programmer: Chandler Teigen
+ * Date: 5/31/2020
+ * Description:
+ * Contains the link and unlink functions.
+ * *******************************************/
 
-/************************************************
+#include "link_unlink.h"
+
+// global variable declared in main.c
+extern int dev;
+
+/*********************************************
  * Function: link
  * Programmer: Chandler Teigen
- * Description: creates a link file that is linked
- * to the old_file.
- * ***********************************************/
+ * Description: links the file with the string name
+ * old_file to a new file with the string name
+ * new_file.
+ * *******************************************/
 int link(char *old_file, char *new_file) {
   int oino, nino, pino;
   MINODE *omip, *nmip, *pmip;

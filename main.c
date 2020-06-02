@@ -25,9 +25,10 @@ int dup_fd, dup_gd;
 
 #include "util.h"
 #include "symlink.h"
+#include "link_unlink.h"
+
 #include "cd_ls_pwd.c"
 #include "mkdir_creat.c"
-#include "link_unlink.c"
 #include "rmdir.c"
 #include "open_close_lseek.c"
 #include "read_cat.c"
