@@ -6,6 +6,7 @@
  * *******************************************/
 
 #include "rmdir.h"
+#include "util.h"
 
 int rm_child(MINODE *pmip, char *name) {
   char buf[BLKSIZE], *cp, temp[256];

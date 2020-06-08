@@ -2,12 +2,15 @@
  * Programmer: Chandler Teigen
  * Date: 5/31/2020
  * Description:
- * Contains the link and unlink functions.
+ * Contains the ct_link and unlink functions.
  * *******************************************/
 
 #include "link_unlink.h"
+#include "util.h"
+#include "mkdir_creat.h"
+#include "rmdir.h"
 
-int link(char *old_file, char *new_file) {
+int ct_link(char *old_file, char *new_file) {
   int oino, nino, pino;
   MINODE *omip, *nmip, *pmip;
   char dir[100], base[100];
@@ -35,7 +38,7 @@ int link(char *old_file, char *new_file) {
   }
 }
 
-int ulink(char *filename) {
+int ct_unlink(char *filename) {
   int ino, pino;
   MINODE *mip, *pmip;
   char dir[100], base[100];

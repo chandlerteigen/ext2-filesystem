@@ -7,6 +7,8 @@
  * *******************************************/
 
 #include "open_close_lseek.h"
+#include "util.h"
+#include "mkdir_creat.h"
 
 int ct_truncate(MINODE *mip) {
   char buf[BLKSIZE], buf2[BLKSIZE], buf3[BLKSIZE];

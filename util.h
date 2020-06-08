@@ -129,6 +129,14 @@ int inc_free_inodes(int dev);
  * ***********************************************/
 int dec_free_inodes(int dev);
 
+/************************************************
+ * Function: int divide_pathname(char *pathname, char *dir, char *base)
+ * Programmer: Chandler Teigen
+ * Description:
+ * splits the pathname string into a dir, and a base file name.
+ * ***********************************************/
+int divide_pathname(char *pathname, char *dir, char *base);
+
 int ct_chmod(char *filename, int octal_permission);
 
 int ct_touch(char *filename);

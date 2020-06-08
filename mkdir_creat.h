@@ -22,14 +22,6 @@ extern PROC *running;
 int enter_name(MINODE *pip, int ino, char *name);
 
 /************************************************
- * Function: int divide_pathname(char *pathname, char *dir, char *base)
- * Programmer: Chandler Teigen
- * Description:
- * splits the pathname string into a dir, and a base file name.
- * ***********************************************/
-int divide_pathname(char *pathname, char *dir, char *base);
-
-/************************************************
  * Function: int ct_mkdir(char *pathname)
  * Programmer: Chandler Teigen
  * Description:

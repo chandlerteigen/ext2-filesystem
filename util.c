@@ -7,6 +7,8 @@
  * *******************************************/
 
 #include "util.h"
+#include "mkdir_creat.h"
+#include "unistd.h"
 
 // Unless otherwise stated, all following functions are provided by KC Wang in
 // the ext2 FS mount root starter code. CS 360 Spring 2020
@@ -349,6 +351,27 @@ int dec_free_inodes(int dev) {
   gd = (GD *)buf;
   gd->bg_free_inodes_count--;
   put_block(dev, 2, buf);
+}
+
+int divide_pathname(char *pathname, char *dir, char *base) {
+  int length = strlen(pathname);
+  int slash = 0;
+
+  for (int i = length - 1; i >= 0; i--) {
+    if (pathname[i] == '/') // indicates the beginning of the basename
+    {
+      slash = i;
+      strcpy(base, &pathname[slash + 1]);
+      pathname[slash] = 0; // NULL terminate the dirname
+      strcpy(dir, pathname);
+      break;
+    } else {
+      if (i == 0) {
+        strcpy(dir, "/");       // dir is root
+        strcpy(base, pathname); // pathname is base
+      }
+    }
+  }
 }
 
 int ct_chmod(char *filename, int octal_permission) {

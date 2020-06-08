@@ -7,6 +7,9 @@
  * *******************************************/
 
 #include "write_cp.h"
+#include "util.h"
+#include "open_close_lseek.h"
+#include "read_cat.h"
 
 int ct_cp(char *srcpath, char *destpath) {
   int fd, gd, n;

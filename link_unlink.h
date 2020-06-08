@@ -12,19 +12,19 @@
 extern int dev;
 
 /************************************************
- * Function: link
+ * Function: ct_link
  * Programmer: Chandler Teigen
  * Description: creates a link file that is linked
  * to the old_file.
  * ***********************************************/
-int link(char *old_file, char *new_file);
+int ct_link(char *old_file, char *new_file);
 
 /************************************************
- * Function: ulink
+ * Function: ct_unlink
  * Programmer: Chandler Teigen
  * Description: unlinks the file indicated by
  * the filename
  * ***********************************************/
-int ulink(char *filename);
+int ct_unlink(char *filename);
 
 #endif

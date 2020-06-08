@@ -1,11 +1,8 @@
 #include "symlink.h"
+#include "util.h"
+#include "mkdir_creat.h"
 
-/************************************************
- * Function: symlink
- * Programmer: Chandler Teigen
- * Description: creates a symbolic link file.
- * ***********************************************/
-int symlink(char *old_file, char *new_file) {
+int ct_symlink(char *old_file, char *new_file) {
   int oino, nino, pino;
   MINODE *omip, *nmip, *pmip;
   char dir[100], base[100];
@@ -32,7 +29,7 @@ int symlink(char *old_file, char *new_file) {
   }
 }
 
-int readlink(char *filename, char *buf, int size) {
+int ct_readlink(char *filename, char *buf, int size) {
   int ino;
   MINODE *mip;
   ino = getino(filename);

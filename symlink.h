@@ -7,12 +7,12 @@
 extern int dev;
 
 /************************************************
- * Function: symlink
+ * Function: ct_symlink
  * Programmer: Chandler Teigen
  * Description: creates a symbolic link file.
  * ***********************************************/
-int symlink(char *old_file, char *new_file);
+int ct_symlink(char *old_file, char *new_file);
 
-int readlink(char *filename, char *buf, int size);
+int ct_readlink(char *filename, char *buf, int size);
 
 #endif

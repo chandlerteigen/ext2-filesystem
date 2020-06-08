@@ -7,6 +7,8 @@
  * *******************************************/
 
 #include "cd_ls_pwd.h"
+#include "util.h"
+#include "unistd.h"
 
 /************************************************
  * Function: int mychdir(char *pathname)

@@ -7,6 +7,8 @@
  * *******************************************/
 
 #include "read_cat.h"
+#include "util.h"
+#include "open_close_lseek.h"
 
 int find_min(int num1, int num2, int num3) {
   int min = num1;

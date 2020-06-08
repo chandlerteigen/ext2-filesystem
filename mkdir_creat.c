@@ -7,6 +7,7 @@
  * *******************************************/
 
 #include "mkdir_creat.h"
+#include "util.h"
 
 int enter_name(MINODE *pip, int ino, char *name) {
   int i, remaining, needed_length, dp_ideal, current_block;
@@ -62,27 +63,6 @@ int enter_name(MINODE *pip, int ino, char *name) {
     }
   }
   return 0;
-}
-
-int divide_pathname(char *pathname, char *dir, char *base) {
-  int length = strlen(pathname);
-  int slash = 0;
-
-  for (int i = length - 1; i >= 0; i--) {
-    if (pathname[i] == '/') // indicates the beginning of the basename
-    {
-      slash = i;
-      strcpy(base, &pathname[slash + 1]);
-      pathname[slash] = 0; // NULL terminate the dirname
-      strcpy(dir, pathname);
-      break;
-    } else {
-      if (i == 0) {
-        strcpy(dir, "/");       // dir is root
-        strcpy(base, pathname); // pathname is base
-      }
-    }
-  }
 }
 
 int ct_mkdir(char *pathname) {

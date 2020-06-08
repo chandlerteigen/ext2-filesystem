@@ -17,6 +17,7 @@
 #include "write_cp.h"
 #include "cd_ls_pwd.h"
 #include "init.h"
+#include "unistd.h"
 
 // global variables
 MINODE minode[NMINODE];
@@ -123,7 +124,7 @@ int main(int argc, char *argv[]) {
     else if (strcmp(cmd, "pwd") == 0)
       pwd(running->cwd);
     else if (strcmp(cmd, "quit") == 0)
-      quit();
+      exit(0);
     else if (strcmp(cmd, "mkdir") == 0)
       ct_mkdir(pathname);
     else if (strcmp(cmd, "creat") == 0)
@@ -132,12 +133,12 @@ int main(int argc, char *argv[]) {
       ct_rmdir(pathname);
     else if (strcmp(cmd, "link") == 0) {
       sscanf(line, "%s %s %s", cmd, pathname, pathname2);
-      link(pathname, pathname2);
+      ct_link(pathname, pathname2);
     } else if (strcmp(cmd, "unlink") == 0)
-      ulink(pathname);
+      ct_unlink(pathname);
     else if (strcmp(cmd, "symlink") == 0) {
       sscanf(line, "%s %s %s", cmd, pathname, pathname2);
-      symlink(pathname, pathname2);
+      ct_symlink(pathname, pathname2);
     } else if (strcmp(cmd, "chmod") == 0) {
       sscanf(line, "%s %o %s", cmd, &permission_bits, pathname);
       ct_chmod(pathname, permission_bits);
