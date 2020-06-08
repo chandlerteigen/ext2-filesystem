@@ -31,7 +31,7 @@ int enter_name(MINODE *pip, int ino, char *name) {
       remaining = dp->rec_len - dp_ideal;
       needed_length = 4 * ((8 + strlen(name) + 3) / 4);
       if (remaining >= needed_length) {
-        dp = (char *)dp + dp_ideal;
+        dp = (DIR *)((char *)dp + dp_ideal);
         dp->inode = ino;
         dp->rec_len =
             old_last_dp->rec_len -
@@ -124,7 +124,7 @@ int ct_mkdir_helper(MINODE *pmip, char *base) {
   dp->name_len = 1;
   dp->name[0] = '.';
   // make ..
-  dp = (char *)dp + 12;
+  dp = (DIR *)((char *)dp + 12);
   dp->inode = pmip->ino;
   dp->rec_len = BLKSIZE - 12;
   dp->name_len = 2;
